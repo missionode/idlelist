@@ -1,0 +1,11 @@
+.nav-link{padding:.5rem .75rem;border-radius:1rem}
+.nav-link.active,.nav-link:hover{background:#0f172a;color:#fff}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:1rem;padding:1rem;box-shadow:0 4px 12px rgba(15,23,42,.06)}
+.input{width:100%;padding:.6rem .8rem;border:1px solid #cbd5e1;border-radius:.8rem;background:#fff}
+.input:focus{outline:none;box-shadow:0 0 0 4px rgba(16,185,129,.15);border-color:#10b981}
+.form-label{display:block;font-size:.85rem;color:#475569;margin-bottom:.25rem}
+.btn{padding:.6rem .9rem;border:1px solid #cbd5e1;border-radius:.9rem;background:#fff}
+.btn:hover{border-color:#94a3b8}
+.btn-primary{padding:.6rem .9rem;border-radius:.9rem;background:#0f172a;color:#fff}
+.badge{display:inline-block;padding:.15rem .5rem;border-radius:.6rem;border:1px solid #cbd5e1;font-size:.75rem}
+.grid-card{display:grid;grid-template-rows:auto 1fr auto;gap:.6rem}

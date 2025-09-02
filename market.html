@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title data-bind="brand">IdleList</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-50 text-slate-800">
+<header class="sticky top-0 z-10 bg-white/80 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <div id="logoMark" class="h-9 w-9 rounded-2xl bg-emerald-600 text-white grid place-items-center text-lg font-bold"></div>
+      <div>
+        <h1 class="text-xl font-semibold" data-bind="brand">IdleList</h1>
+        <p class="text-sm text-slate-500" data-bind="tagline"></p>
+      </div>
+    </a>
+    <nav class="flex items-center gap-4 text-sm">
+      <a class="nav-link" href="index.html" data-bind="nav.dashboard"></a>
+      <a class="nav-link" href="items.html" data-bind="nav.items"></a>
+      <a class="nav-link active" href="market.html" data-bind="nav.market"></a>
+      <a class="nav-link" href="prefs.html" data-bind="nav.prefs"></a>
+      <a class="nav-link" href="help.html" data-bind="nav.help"></a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 py-6 space-y-6">
+  <h2 class="text-2xl font-semibold" data-bind="market.title"></h2>
+
+  <div class="card">
+    <div class="flex flex-wrap items-end gap-3">
+      <div class="grow">
+        <label class="form-label" data-bind="market.filters.search"></label>
+        <input id="q" class="input" placeholder="e.g., drill, sofa">
+      </div>
+      <div>
+        <label class="form-label" data-bind="market.filters.mode"></label>
+        <select id="fMode" class="input">
+          <option value="all" data-bind="market.filters.all"></option>
+          <option value="sale" data-bind="market.filters.sale"></option>
+          <option value="rent" data-bind="market.filters.rent"></option>
+        </select>
+      </div>
+      <div>
+        <label class="form-label" data-bind="market.filters.type"></label>
+        <select id="fType" class="input"></select>
+      </div>
+    </div>
+  </div>
+
+  <div id="listings" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+</main>
+
+<script type="application/json" id="strings">
+{
+  "brand": "IdleList",
+  "tagline": "Declutter smarter. Mark idle things for sale or rent.",
+  "nav": { "dashboard": "Dashboard", "items": "My Items", "market": "Marketplace", "prefs": "Preferences", "help": "Help" },
+  "market": { "title": "Marketplace", "filters": { "search": "Search", "mode": "Mode", "all": "All", "sale": "Sale", "rent": "Rent", "type": "Type" }, "contact": "Contact via WhatsApp: +91 9000000000" }
+}
+</script>
+
+<script type="application/json" id="presets">
+{
+  "idleThresholdDays": 30,
+  "types": ["electronics","furniture","tools","clothing","books","other"],
+  "allowedModes": { "electronics":"both","furniture":"both","tools":"both","clothing":"sale","books":"sale","other":"both" }
+}
+</script>
+
+<script src="js/core.js"></script>
+<script src="js/store.js"></script>
+<script src="js/market.js"></script>
+</body>
+</html>

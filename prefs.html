@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title data-bind="brand">IdleList</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-50 text-slate-800">
+<header class="sticky top-0 z-10 bg-white/80 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <div id="logoMark" class="h-9 w-9 rounded-2xl bg-emerald-600 text-white grid place-items-center text-lg font-bold"></div>
+      <div>
+        <h1 class="text-xl font-semibold" data-bind="brand">IdleList</h1>
+        <p class="text-sm text-slate-500" data-bind="tagline"></p>
+      </div>
+    </a>
+    <nav class="flex items-center gap-4 text-sm">
+      <a class="nav-link" href="index.html" data-bind="nav.dashboard"></a>
+      <a class="nav-link" href="items.html" data-bind="nav.items"></a>
+      <a class="nav-link" href="market.html" data-bind="nav.market"></a>
+      <a class="nav-link active" href="prefs.html" data-bind="nav.prefs"></a>
+      <a class="nav-link" href="help.html" data-bind="nav.help"></a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-3xl mx-auto px-4 py-6 space-y-6">
+  <h2 class="text-2xl font-semibold" data-bind="prefs.title"></h2>
+
+  <section class="card">
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div>
+        <label class="form-label" data-bind="prefs.idleThreshold"></label>
+        <input id="idleDays" type="number" class="input" min="1" step="1">
+      </div>
+      <div>
+        <label class="form-label" data-bind="prefs.modesTitle"></label>
+        <div id="modes" class="grid grid-cols-2 gap-2"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card space-y-3">
+    <h3 class="text-lg font-semibold" data-bind="prefs.backup"></h3>
+    <div class="flex gap-3 flex-wrap">
+      <button id="exportBtn" class="btn" data-bind="prefs.export"></button>
+      <label class="btn cursor-pointer">
+        <input id="importFile" type="file" class="hidden" accept="application/json">
+        <span data-bind="prefs.import"></span>
+      </label>
+    </div>
+  </section>
+
+  <section class="card space-y-3">
+    <h3 class="text-lg font-semibold" data-bind="prefs.autosave"></h3>
+    <div class="flex gap-3 flex-wrap">
+      <button id="enableAuto" class="btn" data-bind="prefs.enable"></button>
+      <button id="disableAuto" class="btn" data-bind="prefs.disable"></button>
+    </div>
+    <div class="text-sm text-slate-600"><span data-bind="prefs.status"></span>: <span id="autoStatus">Off</span></div>
+  </section>
+</main>
+
+<script type="application/json" id="strings">
+{
+  "brand": "IdleList",
+  "tagline": "Declutter smarter. Mark idle things for sale or rent.",
+  "nav": { "dashboard": "Dashboard", "items": "My Items", "market": "Marketplace", "prefs": "Preferences", "help": "Help" },
+  "prefs": { "title": "Preferences", "idleThreshold": "Idle threshold (days)", "modesTitle": "Type to allowed modes", "backup": "Backup & Restore", "export": "Export JSON", "import": "Import JSON", "autosave": "Auto-save to a .json file", "enable": "Enable Auto-save", "disable": "Forget Auto-save file", "status": "Auto-save status" }
+}
+</script>
+
+<script type="application/json" id="presets">
+{
+  "idleThresholdDays": 30,
+  "types": ["electronics","furniture","tools","clothing","books","other"],
+  "allowedModes": { "electronics":"both","furniture":"both","tools":"both","clothing":"sale","books":"sale","other":"both" }
+}
+</script>
+
+<script src="js/core.js"></script>
+<script src="js/store.js"></script>
+<script src="js/prefs.js"></script>
+</body>
+</html>

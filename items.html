@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title data-bind="brand">IdleList</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-50 text-slate-800">
+<header class="sticky top-0 z-10 bg-white/80 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <div id="logoMark" class="h-9 w-9 rounded-2xl bg-emerald-600 text-white grid place-items-center text-lg font-bold"></div>
+      <div>
+        <h1 class="text-xl font-semibold" data-bind="brand">IdleList</h1>
+        <p class="text-sm text-slate-500" data-bind="tagline"></p>
+      </div>
+    </a>
+    <nav class="flex items-center gap-4 text-sm">
+      <a class="nav-link" href="index.html" data-bind="nav.dashboard"></a>
+      <a class="nav-link active" href="items.html" data-bind="nav.items"></a>
+      <a class="nav-link" href="market.html" data-bind="nav.market"></a>
+      <a class="nav-link" href="prefs.html" data-bind="nav.prefs"></a>
+      <a class="nav-link" href="help.html" data-bind="nav.help"></a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 py-6 space-y-6">
+  <h2 class="text-2xl font-semibold" data-bind="items.title"></h2>
+
+  <section class="grid lg:grid-cols-2 gap-6">
+    <form id="itemForm" class="card space-y-4">
+      <input type="hidden" id="itemId">
+      <div class="grid sm:grid-cols-2 gap-3">
+        <div>
+          <label class="form-label">Title</label>
+          <input id="title" class="input" placeholder="e.g., Bosch Drill">
+        </div>
+        <div>
+          <label class="form-label">Type</label>
+          <select id="type" class="input"></select>
+        </div>
+        <div>
+          <label class="form-label">Condition</label>
+          <select id="condition" class="input">
+            <option>new</option><option>like-new</option><option>good</option><option>used</option><option>for-parts</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Transaction Mode</label>
+          <select id="transactionMode" class="input">
+            <option value="sale">sale</option>
+            <option value="rent">rent</option>
+            <option value="both">both</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Price (sale)</label>
+          <input id="price" type="number" class="input" min="0" step="1" placeholder="₹">
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <div>
+            <label class="form-label">Rent/day</label>
+            <input id="rentDay" type="number" class="input" min="0" step="1">
+          </div>
+          <div>
+            <label class="form-label">Rent/week</label>
+            <input id="rentWeek" type="number" class="input" min="0" step="1">
+          </div>
+          <div>
+            <label class="form-label">Rent/month</label>
+            <input id="rentMonth" type="number" class="input" min="0" step="1">
+          </div>
+        </div>
+      </div>
+      <div>
+        <label class="form-label">Description</label>
+        <textarea id="description" class="input" rows="3" placeholder="Details, defects, accessories"></textarea>
+      </div>
+      <div>
+        <label class="form-label">Location</label>
+        <input id="location" class="input" placeholder="City, Area">
+      </div>
+      <div>
+        <label class="form-label">Photos</label>
+        <input id="photos" type="file" class="input" accept="image/*" multiple>
+        <div id="photoPreview" class="mt-2 grid grid-cols-3 gap-2"></div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="saveBtn" class="btn-primary" type="submit" data-bind="items.save"></button>
+        <button id="checkinBtn" class="btn" type="button" data-bind="items.checkin"></button>
+        <button id="listSaleBtn" class="btn" type="button" data-bind="items.listSale"></button>
+        <button id="listRentBtn" class="btn" type="button" data-bind="items.listRent"></button>
+      </div>
+    </form>
+
+    <div>
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-xl font-semibold">Your Items</h3>
+        <input id="q" class="input w-56" placeholder="Search">
+      </div>
+      <div id="itemList" class="grid gap-3"></div>
+    </div>
+  </section>
+</main>
+
+<script type="application/json" id="strings">
+{
+  "brand": "IdleList",
+  "tagline": "Declutter smarter. Mark idle things for sale or rent.",
+  "nav": { "dashboard": "Dashboard", "items": "My Items", "market": "Marketplace", "prefs": "Preferences", "help": "Help" },
+  "items": { "title": "My Items", "add": "Add Item", "save": "Save Item", "update": "Update Item", "checkin": "I used this today", "listSale": "List for Sale", "listRent": "List for Rent" }
+}
+</script>
+
+<script type="application/json" id="presets">
+{
+  "idleThresholdDays": 30,
+  "types": ["electronics","furniture","tools","clothing","books","other"],
+  "allowedModes": {
+    "electronics": "both",
+    "furniture": "both",
+    "tools": "both",
+    "clothing": "sale",
+    "books": "sale",
+    "other": "both"
+  }
+}
+</script>
+
+<script src="js/core.js"></script>
+<script src="js/store.js"></script>
+<script src="js/items.js"></script>
+</body>
+</html>

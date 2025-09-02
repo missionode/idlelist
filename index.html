@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title data-bind="brand">IdleList</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-50 text-slate-800">
+<header class="sticky top-0 z-10 bg-white/80 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <div id="logoMark" class="h-9 w-9 rounded-2xl bg-emerald-600 text-white grid place-items-center text-lg font-bold"></div>
+      <div>
+        <h1 class="text-xl font-semibold" data-bind="brand">IdleList</h1>
+        <p class="text-sm text-slate-500" data-bind="tagline"></p>
+      </div>
+    </a>
+    <nav class="flex items-center gap-4 text-sm">
+      <a class="nav-link" href="index.html" data-bind="nav.dashboard"></a>
+      <a class="nav-link" href="items.html" data-bind="nav.items"></a>
+      <a class="nav-link" href="market.html" data-bind="nav.market"></a>
+      <a class="nav-link" href="prefs.html" data-bind="nav.prefs"></a>
+      <a class="nav-link" href="help.html" data-bind="nav.help"></a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 py-6 space-y-6">
+  <section>
+    <h2 class="text-2xl font-semibold mb-4" data-bind="dashboard.title"></h2>
+    <div id="stats" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3"></div>
+  </section>
+
+  <section>
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="text-xl font-semibold" data-bind="dashboard.needsAction"></h3>
+      <a href="items.html" class="px-3 py-2 rounded-xl bg-slate-900 text-white text-sm" data-bind="items.add"></a>
+    </div>
+    <div id="needsAction" class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"></div>
+  </section>
+</main>
+
+<script type="application/json" id="strings">
+{
+  "brand": "IdleList",
+  "tagline": "Declutter smarter. Mark idle things for sale or rent.",
+  "nav": { "dashboard": "Dashboard", "items": "My Items", "market": "Marketplace", "prefs": "Preferences", "help": "Help" },
+  "dashboard": { "title": "Overview", "needsAction": "Needs Action", "stats": { "total": "Total", "inUse": "In Use", "idle": "Idle", "planned": "Planned", "forSale": "For Sale", "forRent": "For Rent" } },
+  "items": { "title": "My Items", "add": "Add Item", "save": "Save Item", "update": "Update Item", "checkin": "I used this today", "listSale": "List for Sale", "listRent": "List for Rent" },
+  "market": { "title": "Marketplace", "filters": { "search": "Search", "mode": "Mode", "all": "All", "sale": "Sale", "rent": "Rent", "type": "Type" }, "contact": "Contact via WhatsApp: +91 9000000000" },
+  "prefs": { "title": "Preferences", "idleThreshold": "Idle threshold (days)", "modesTitle": "Type to allowed modes", "backup": "Backup & Restore", "export": "Export JSON", "import": "Import JSON", "autosave": "Auto-save to a .json file", "enable": "Enable Auto-save", "disable": "Forget Auto-save file", "status": "Auto-save status" },
+  "help": { "title": "Help", "contentHtml": "<h3>How it works</h3><ol><li>Add items you own.</li><li>Tap check-in when you use them.</li><li>If idle beyond your threshold, they show up here. One click to list for sale or rent.</li></ol><h3>Privacy</h3><p>Everything stays in your browser unless you export a backup file.</p><h3>Tips</h3><ul><li>Set threshold in Preferences.</li><li>Use good photos.</li><li>Price realistically and use rent for tools.</li></ul>" }
+}
+</script>
+
+<script type="application/json" id="presets">
+{
+  "idleThresholdDays": 30,
+  "types": ["electronics","furniture","tools","clothing","books","other"],
+  "allowedModes": {
+    "electronics": "both",
+    "furniture": "both",
+    "tools": "both",
+    "clothing": "sale",
+    "books": "sale",
+    "other": "both"
+  }
+}
+</script>
+
+<script src="js/core.js"></script>
+<script src="js/store.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

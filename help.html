@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title data-bind="brand">IdleList</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-50 text-slate-800">
+<header class="sticky top-0 z-10 bg-white/80 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <div id="logoMark" class="h-9 w-9 rounded-2xl bg-emerald-600 text-white grid place-items-center text-lg font-bold"></div>
+      <div>
+        <h1 class="text-xl font-semibold" data-bind="brand">IdleList</h1>
+        <p class="text-sm text-slate-500" data-bind="tagline"></p>
+      </div>
+    </a>
+    <nav class="flex items-center gap-4 text-sm">
+      <a class="nav-link" href="index.html" data-bind="nav.dashboard"></a>
+      <a class="nav-link" href="items.html" data-bind="nav.items"></a>
+      <a class="nav-link" href="market.html" data-bind="nav.market"></a>
+      <a class="nav-link" href="prefs.html" data-bind="nav.prefs"></a>
+      <a class="nav-link active" href="help.html" data-bind="nav.help"></a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-3xl mx-auto px-4 py-6">
+  <article id="help" class="prose"></article>
+</main>
+
+<script type="application/json" id="strings">
+{
+  "brand": "IdleList",
+  "tagline": "Declutter smarter. Mark idle things for sale or rent.",
+  "nav": { "dashboard": "Dashboard", "items": "My Items", "market": "Marketplace", "prefs": "Preferences", "help": "Help" },
+  "help": { "title": "Help", "contentHtml": "<h2>Getting Started</h2><p>Use <b>My Items</b> to add belongings. Check in when used. Items idle beyond your threshold appear on the Dashboard under <b>Needs Action</b>.</p><h3>Listing</h3><p>Choose <b>List for Sale</b> or <b>List for Rent</b>. Listings appear in the Marketplace for local sharing.</p><h3>Backup</h3><p>Go to <b>Preferences</b> to export or import your data. Auto-save to a chosen file if your browser supports it.</p><h3>Contact</h3><p>Share the listing and chat via your preferred app. Update contact text in Market page strings if needed.</p>" }
+}
+</script>
+
+<script src="js/core.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const STR = window.STRINGS
+  document.title = STR.brand
+  document.querySelector('[data-bind="brand"]').textContent = STR.brand
+  document.querySelector('[data-bind="tagline"]').textContent = STR.tagline
+  document.querySelectorAll('.nav-link')[0].textContent = STR.nav.dashboard
+  document.querySelectorAll('.nav-link')[1].textContent = STR.nav.items
+  document.querySelectorAll('.nav-link')[2].textContent = STR.nav.market
+  document.querySelectorAll('.nav-link')[3].textContent = STR.nav.prefs
+  document.querySelectorAll('.nav-link')[4].textContent = STR.nav.help
+  document.getElementById('help').innerHTML = STR.help.contentHtml
+  const m = document.getElementById('logoMark')
+  m.textContent = STR.brand[0] || 'I'
+})
+</script>
+</body>
+</html>
